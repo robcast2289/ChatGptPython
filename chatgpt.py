@@ -1,6 +1,6 @@
 from openai import OpenAI
 
-client = OpenAI(api_key = "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")
+client = OpenAI(api_key = "")
 
 while True:
 
