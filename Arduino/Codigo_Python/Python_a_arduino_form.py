@@ -33,7 +33,7 @@ def toggle_group(event):
     led_color = color[group] if estado_botones[group] == 1 else "white"
     for led in group_leds:
         estado_leds[led] = estado_botones[group]
-    puerto.write(f"{chr(group + 65) if estado_botones[group] == 1 else chr(group + 69)}\n".encode())
+    #puerto.write(f"{chr(group + 65) if estado_botones[group] == 1 else chr(group + 69)}\n".encode())
     draw()
 def toggle_led(event):
     tag = event.widget.find_withtag("current")[0]
@@ -41,12 +41,11 @@ def toggle_led(event):
     led_index = int(tag_str[3]) - 1
     toggle_led_state(led_index)
 def toggle_led_state(led_index):
-    print(led_index)
     estado_leds[led_index] = 1 - estado_leds[led_index]
-    if estado_leds[led_index] == 1:
-        puerto.write(f"{chr(led_index + 48)}\n".encode())
-    else:
-        puerto.write(f"{chr(led_index + 97)}\n".encode())
+    #if estado_leds[led_index] == 1:
+    #    puerto.write(f"{chr(led_index + 48)}\n".encode())
+    #else:
+    #    puerto.write(f"{chr(led_index + 97)}\n".encode())
     draw()
 def update_from_arduino():
     global estado_botones
@@ -73,12 +72,12 @@ height = 500
 root.geometry(f"{width}x{height}")
 canvas = Canvas(root, width=width, height=height)
 canvas.pack()
-setup_serial()
+#setup_serial()
 draw()
 for i in range(3):
     canvas.tag_bind(f"btn{i + 1}", "<Button-1>", toggle_group)
 for i in range(6):
     canvas.tag_bind(f"led{i + 1}", "<Button-1>", toggle_led)
-root.after(10, update_from_arduino)
+#root.after(10, update_from_arduino)
 root.mainloop()
 puerto.close()
